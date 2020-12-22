@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+let sum = 0;
+
 export default function App() {
-  // const [addedValue, setAddedValue] = useState("");
+  const [addedValue, setAddedValue] = useState("");
+
   function add() {
-    let sum = 0;
+    console.log("sumTop", sum);
     let number;
-    // document.querySelector("#userInputID") === null ? 0, number = document.querySelector("#userInputID");
-    sum += number.value;
-    // setAddedValue(sum);
-    console.log(sum);
+    let userInputTag = document.querySelector(".userInputID");
+
+    console.log("userinput", userInputTag.value);
+
+    number = parseInt(userInputTag.value);
+
+    console.log("number", number);
+
+    sum += number;
+    setAddedValue(sum);
+    console.log("sumbottom", sum);
   }
 
   return (
@@ -23,7 +33,8 @@ export default function App() {
           name=""
           placeholder="type a number"
         />
-        <button className="addBtn" onClick={add()}>
+
+        <button className="addBtn" onClick={add}>
           Add (+)
         </button>
       </div>
@@ -33,6 +44,8 @@ export default function App() {
 }
 
 /* 
-  take inputs from user and add them 
+  DONE: add two numbers
+  DONE: take inputs from user and add them 
+  DONE: and show the result in UI
 
 */
