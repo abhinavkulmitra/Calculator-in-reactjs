@@ -14,7 +14,8 @@ export default function App() {
   const [addedValue, setAddedValue] = useState("");
 
   function calculate(value) {
-    let number = parseInt(document.querySelector(".userInputID").value);
+    let inputBar = document.querySelector(".userInputID");
+    let number = parseInt(inputBar.value);
 
     switch (value) {
       case "add":
@@ -30,9 +31,11 @@ export default function App() {
         sum = sum / number;
         break;
       default:
-        console.log("something happed, unexpected", value);
+        sum = 0;
     }
 
+    inputBar.value = ""; //reset the input value
+    inputBar.focus();
     setAddedValue(sum);
   }
 
@@ -44,12 +47,7 @@ export default function App() {
       <div className="addition">{addedValue}</div>
 
       <div className="userInput">
-        <input
-          type="number"
-          className="userInputID"
-          name=""
-          placeholder="type a number"
-        />
+        <input className="userInputID" placeholder="type a number" />
         {Object.keys(symbols).map((cur) => (
           <button onClick={() => calculate(cur)} key={cur}>
             {cur + " " + symbols[cur]}
