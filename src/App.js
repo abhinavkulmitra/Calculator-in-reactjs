@@ -1,31 +1,48 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+let symbols = {
+  add: "+",
+  substract: "-",
+  multiply: "x",
+  divide: "÷"
+};
+
 let sum = 0;
 
 export default function App() {
   const [addedValue, setAddedValue] = useState("");
 
-  function add() {
-    console.log("sumTop", sum);
-    let number;
-    let userInputTag = document.querySelector(".userInputID");
+  function calculate(value) {
+    let number = parseInt(document.querySelector(".userInputID").value);
 
-    console.log("userinput", userInputTag.value);
+    switch (value) {
+      case "add":
+        sum += number;
+        break;
+      case "substract":
+        sum = sum - number;
+        break;
+      case "multiply":
+        sum = sum * number;
+        break;
+      case "divide":
+        sum = sum / number;
+        break;
+      default:
+        console.log("something happed, unexpected", value);
+    }
 
-    number = parseInt(userInputTag.value);
-
-    console.log("number", number);
-
-    sum += number;
     setAddedValue(sum);
-    console.log("sumbottom", sum);
   }
 
   return (
     <div className="App">
       <h1>+ - x ÷</h1>
       <h2>A calculator</h2>
+
+      <div className="addition">{addedValue}</div>
+
       <div className="userInput">
         <input
           type="number"
@@ -33,20 +50,21 @@ export default function App() {
           name=""
           placeholder="type a number"
         />
-
-        <button className="addBtn" onClick={add}>
-          Add (+)
-        </button>
+        {Object.keys(symbols).map((cur) => (
+          <button onClick={() => calculate(cur)} key={cur}>
+            {cur + " " + symbols[cur]}
+          </button>
+        ))}
       </div>
-      <div className="addition">{addedValue}</div>
     </div>
   );
 }
 
-/* 
-  DONE: add two numbers
-  DONE: take inputs from user and add them 
-  DONE: and show the result in UI
-
-
-*/
+// DONE: add two numbers
+// DONE: take inputs from user and add them
+// DONE: and show the result in UI
+// DONE: add substract, multiply and division btns
+// erase input from input bar and add focus
+// -> show the add as 1 + 4 = 5 in UI
+// ->
+// ->
